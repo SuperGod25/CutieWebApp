@@ -45,7 +45,7 @@ Echipa Cutie ❤️
 cutie - florărie, cafenea și comunitate
 Strada Comunității 123, Cluj-Napoca
 Telefon: +40 264 123 456
-Email: salut@cutie.ro
+Email: cutie.cafea@gmail.com
     `
   },
 
@@ -66,7 +66,7 @@ Echipa Cutie ❤️
 cutie - florărie, cafenea și comunitate
 Strada Comunității 123, Cluj-Napoca
 Telefon: +40 264 123 456
-Email: salut@cutie.ro
+Email: cutie.cafea@gmail.com
     `
   }
 };
