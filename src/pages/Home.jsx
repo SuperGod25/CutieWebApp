@@ -65,7 +65,7 @@ const Home = () => {
             florărie, cafenea și comunitate: un spațiu pentru incluziune, creativitate și conexiune
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Unde cafeaua întâlnește comunitatea în inima Cluj-Napocii. O întreprindere socială dedicată construirii de punți între oameni prin experiențe autentice și sustenabile.
+            Unde cafeaua întâlnește comunitatea în inima orașului Cluj-Napoca. O întreprindere socială dedicată construirii de punți între oameni prin experiențe autentice și sustenabile.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-violet-500 hover:bg-violet-600">
