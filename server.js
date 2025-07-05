@@ -114,4 +114,21 @@ app.post('/api/send-reservation-email', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 5001;
+
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Required for __dirname in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve static files from dist
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// All GET requests not handled before (like /) should serve index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
+
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
