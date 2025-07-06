@@ -3,6 +3,7 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 dotenv.config();
 console.log("✅ ENV GMAIL_USER:", process.env.GMAIL_USER);
@@ -10,7 +11,6 @@ console.log("✅ ENV GMAIL_USER:", process.env.GMAIL_USER);
 const app = express();
 app.use(express.json());
 
-// === EMAIL ROUTE ===
 app.post('/api/send-reservation-email', async (req, res) => {
   const data = req.body;
 
@@ -26,10 +26,41 @@ app.post('/api/send-reservation-email', async (req, res) => {
     }
   };
 
-  const templates = {
-    reservationConfirmation: {
-      subject: (date) => `Confirmare rezervare ${date}`,
-      body: (data) => `
+  let subject = '';
+  let body = '';
+
+  if (data.type === 'decline') {
+    subject = 'Rezervarea ta nu a fost acceptată';
+    body = `
+Salut, ${data.name}!
+
+Ne pare rău, dar rezervarea ta nu a putut fi acceptată.
+
+Motivul:
+${data.reason}
+
+Te încurajăm să încerci din nou sau să ne contactezi pentru alte opțiuni.
+
+Mulțumim pentru înțelegere!
+
+Echipa Cutie ❤️
+`;
+  } else if (data.type === 'event') {
+    subject = `Confirmare înregistrare - ${data.eventTitle}`;
+    body = `
+Salut, ${data.name}!
+
+Mulțumim pentru înregistrarea la evenimentul "${data.eventTitle}"!
+
+Te-ai înregistrat cu succes și îți rezervăm un loc. Vei primi mai multe detalii cu câteva zile înainte de eveniment.
+
+Te așteptăm cu drag!
+
+Echipa Cutie ❤️
+`;
+  } else if (data.type === 'reservation') {
+    subject = `Confirmare rezervare ${data.reservation_date}`;
+    body = `
 Salut, ${data.name}!
 
 Mulțumim și confirmăm rezervarea din data de ${data.reservation_date} la ora ${data.reservation_time} pentru ${data.party_size || '1'} ${data.party_size === '1' ? 'persoană' : 'persoane'} la noi la locație.
@@ -46,55 +77,21 @@ Te așteptăm cu drag!
 O zi minunată!
 
 Echipa Cutie ❤️
-
----
-cutie - florărie, cafenea și comunitate
-Strada Comunității 123, Cluj-Napoca
-Telefon: +40 264 123 456
-Email: cutie.cafea@gmail.com
-      `
-    },
-    eventRegistration: {
-      subject: (title) => `Confirmare înregistrare - ${title}`,
-      body: (data) => `
-Salut, ${data.name}!
-
-Mulțumim pentru înregistrarea la evenimentul "${data.eventTitle}"!
-
-Te-ai înregistrat cu succes și îți rezervăm un loc. Vei primi mai multe detalii cu câteva zile înainte de eveniment.
-
-Te așteptăm cu drag!
-
-Echipa Cutie ❤️
-
----
-cutie - florărie, cafenea și comunitate
-Strada Comunității 123, Cluj-Napoca
-Telefon: +40 264 123 456
-Email: cutie.cafea@gmail.com
-      `
-    }
-  };
+`;
+  } else {
+    return res.status(400).json({ success: false, error: 'Invalid email type' });
+  }
 
   try {
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 587,
-      secure: false, // STARTTLS
+      secure: false,
       auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_APP_PASSWORD
       }
     });
-
-    const isEvent = data.type === 'event';
-    const subject = isEvent
-      ? templates.eventRegistration.subject(data.eventTitle)
-      : templates.reservationConfirmation.subject(data.reservation_date);
-
-    const body = isEvent
-      ? templates.eventRegistration.body(data)
-      : templates.reservationConfirmation.body(data);
 
     const mailOptions = {
       from: `"Cutie" <${process.env.GMAIL_USER}>`,
@@ -107,23 +104,19 @@ Email: cutie.cafea@gmail.com
     console.log('✅ Email trimis:', info.response);
     res.json({ success: true });
   } catch (error) {
-    console.error('❌ Eroare la trimitere email:', error.message, error.response || '');
+    console.error('❌ Eroare email:', error.message);
     res.status(500).json({ success: false, error: error.message });
   }
 });
 
-// === STATIC FRONTEND ===
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-import fs from 'fs';
-
 const distPath = path.join(__dirname, 'dist');
 
 if (fs.existsSync(distPath)) {
   console.log("✅ Serving static files from:", distPath);
   app.use(express.static(distPath));
-
   app.get('*', (req, res) => {
     res.sendFile(path.join(distPath, 'index.html'));
   });
@@ -131,11 +124,41 @@ if (fs.existsSync(distPath)) {
   console.warn("⚠️  Skipping static file serving: 'dist/' folder not found.");
 }
 
+app.post('/api/send-newsletter', async (req, res) => {
+  const { subject, message, recipients } = req.body;
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  if (!subject || !message || !recipients?.length) {
+    return res.status(400).json({ success: false, error: 'Date incomplete.' });
+  }
+
+  try {
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD
+      }
+    });
+
+    for (const email of recipients) {
+      await transporter.sendMail({
+  from: `"Cutie" <${process.env.GMAIL_USER}>`,
+  to: email,
+  subject,
+  html: message // changed from text → html
+});
+    }
+
+    console.log(`✅ Newsletter trimis către ${recipients.length} abonați.`);
+    res.json({ success: true });
+  } catch (error) {
+    console.error('❌ Eroare newsletter:', error.message);
+    res.status(500).json({ success: false, error: error.message });
+  }
 });
 
-// === START SERVER ===
+
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));

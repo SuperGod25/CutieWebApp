@@ -43,22 +43,13 @@ export const reservationAPI = {
 
       console.log('Rezervare salvată cu succes:', data);
 
-      const response = await fetch('/api/send-reservation-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...reservationData, id: data.id })
-      });
-
-      const emailResult = await response.json();
 
       return {
-        success: true,
-        data: data,
-        emailSent: emailResult.success,
-        message: emailResult.success
-          ? 'Rezervarea a fost salvată și email-ul de confirmare a fost trimis!'
-          : 'Rezervarea a fost salvată, dar email-ul de confirmare nu a putut fi trimis.'
-      };
+  success: true,
+  data: data,
+  message: 'Mulțumim pentru rezervare!'
+};
+
     } catch (error) {
       console.error('Eroare la crearea rezervării:', error);
       return {

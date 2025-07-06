@@ -169,8 +169,7 @@ const Reservations = () => {
             ) : (
               <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
                 <p className="text-yellow-700">
-                  ⚠️ Rezervarea a fost salvată, dar confirmarea automată nu este disponibilă momentan.
-                  Te vom contacta telefonic pentru confirmare.
+                  ✅ Cererea de rezervare a fost salvată. În scurt timp veți primi confirmarea pe email.
                 </p>
               </div>
             )}

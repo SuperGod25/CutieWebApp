@@ -9,6 +9,10 @@ import Reservations from './pages/Reservations';
 import Events from './pages/Events';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import LoginPage from './pages/admin/LoginPage';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import ReservationsPanel from './pages/Admin/ReservationsPanel';
+import NewsletterPanel from './pages/Admin/NewsletterPanel';
 
 function App() {
   return (
@@ -24,6 +28,10 @@ function App() {
             <Route path="/events" element={<Events />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<LoginPage />} />
+            <Route path="/dashboard" element={<AdminDashboard />} />
+            <Route path="/dashboard/reservations" element={<ReservationsPanel />} />
+            <Route path="/dashboard/newsletter" element={<NewsletterPanel />} />
           </Routes>
         </main>
         <Footer />
