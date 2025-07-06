@@ -9,8 +9,8 @@ import Reservations from './pages/Reservations';
 import Events from './pages/Events';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import LoginPage from './pages/admin/LoginPage';
-import AdminDashboard from './pages/admin/AdminDashboard';
+import LoginPage from './pages/Admin/LoginPage';
+import AdminDashboard from './pages/Admin/AdminDashboard';
 import ReservationsPanel from './pages/Admin/ReservationsPanel';
 import NewsletterPanel from './pages/Admin/NewsletterPanel';
 
