@@ -13,6 +13,7 @@ const LoginPage: React.FC = () => {
     e.preventDefault();
 
     if (email === import.meta.env.VITE_ADMIN_EMAIL && password === import.meta.env.VITE_ADMIN_PASSWORD) {
+      localStorage.setItem('isAdmin', 'true');
       navigate('/dashboard');
     } else {
       setError('Email sau parolă incorectă.');

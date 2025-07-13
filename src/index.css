@@ -59,3 +59,70 @@
     font-family: 'Manrope', sans-serif;
   }
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Roboto&display=swap');
+
+.ql-font-arial {
+  font-family: Arial, sans-serif;
+}
+.ql-font-times-new-roman {
+  font-family: 'Times New Roman', serif;
+}
+.ql-font-courier-new {
+  font-family: 'Courier New', monospace;
+}
+.ql-font-georgia {
+  font-family: Georgia, serif;
+}
+.ql-font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
+.ql-font-raleway {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+}
+.ql-font-raleway-heavy {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+}
+
+.ql-picker.ql-font .ql-picker-item::before,
+.ql-picker.ql-font .ql-picker-label::before {
+  content: none !important;
+}
+
+/* Prevent long font labels from breaking layout */
+.ql-picker.ql-font .ql-picker-label,
+.ql-picker.ql-font .ql-picker-item {
+  max-width: 140px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/* Force the font picker dropdown to open upwards */
+.ql-toolbar .ql-picker.ql-font .ql-picker-options {
+  bottom: 100%;
+  top: auto;
+  margin-bottom: 8px;
+  margin-top: 0;
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1); /* shadow above */
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  z-index: 10;
+  transition: transform 0.2s ease;
+}
+
+.ql-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: white;
+  border-bottom: 1px solid #e2e8f0; /* light gray line */
+}
+
+
+/* Optional: shift entire font picker slightly to prevent overlap with toolbar buttons */
+
+
+
+

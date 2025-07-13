@@ -33,28 +33,7 @@ const Events = () => {
 
   const upcomingEvents = events.filter(event => new Date(event.event_date) >= new Date());
 
-  const pastEvents = [
-    {
-      title: "Celebrarea deschiderii",
-      date: "Ianuarie 2024",
-      description: "Comunitatea noastră s-a unit pentru a celebra deschiderea cutie",
-      images: [
-        "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=300&h=200&fit=crop",
-        "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=300&h=200&fit=crop",
-        "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=300&h=200&fit=crop"
-      ]
-    },
-    {
-      title: "Workshop flori de sărbători",
-      date: "Decembrie 2023",
-      description: "Crearea de aranjamente festive pentru sezonul sărbătorilor",
-      images: [
-        "https://images.unsplash.com/photo-1481833761820-0509d3217039?w=300&h=200&fit=crop",
-        "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop",
-        "https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=300&h=200&fit=crop"
-      ]
-    }
-  ];
+  
 
   const handleSignUp = async (event) => {
     const name = prompt('Introdu numele tău:');
@@ -190,42 +169,7 @@ const Events = () => {
           )}
         </section>
 
-        {/* Past Events Gallery */}
-        <section className="mb-16">
-          <div className="flex items-center space-x-3 mb-8">
-            <Camera className="h-8 w-8 text-primary" />
-            <h2 className="text-3xl font-bold">Galeria evenimentelor trecute</h2>
-          </div>
-          
-          <div className="space-y-8">
-            {pastEvents.map((event, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle>{event.title}</CardTitle>
-                      <CardDescription>{event.date}</CardDescription>
-                    </div>
-                  </div>
-                  <p className="text-muted-foreground">{event.description}</p>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {event.images.map((image, imgIndex) => (
-                      <div key={imgIndex} className="aspect-video overflow-hidden rounded-lg">
-                        <img 
-                          src={image} 
-                          alt={`${event.title} fotografie ${imgIndex + 1}`}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform cursor-pointer"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
+        
 
         {/* Event Information */}
         <section className="bg-muted/30 rounded-lg p-8">

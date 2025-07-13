@@ -13,6 +13,8 @@ import LoginPage from './pages/Admin/LoginPage';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import ReservationsPanel from './pages/Admin/ReservationsPanel';
 import NewsletterPanel from './pages/Admin/NewsletterPanel';
+import ManagePanel from './pages/Admin/manage/ManagePanel';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 function App() {
   return (
@@ -29,9 +31,38 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin" element={<LoginPage />} />
-            <Route path="/dashboard" element={<AdminDashboard />} />
-            <Route path="/dashboard/reservations" element={<ReservationsPanel />} />
-            <Route path="/dashboard/newsletter" element={<NewsletterPanel />} />
+            <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                }
+            />
+            <Route
+            path="/dashboard/reservations"
+            element={
+              <ProtectedRoute>
+                  <ReservationsPanel />
+              </ProtectedRoute>
+                }
+            />
+            <Route
+  path="/dashboard/newsletter"
+  element={
+    <ProtectedRoute>
+      <NewsletterPanel />
+    </ProtectedRoute>
+  }
+/>
+            <Route
+  path="/dashboard/manage"
+  element={
+    <ProtectedRoute>
+      <ManagePanel />
+    </ProtectedRoute>
+  }
+/>
           </Routes>
         </main>
         <Footer />
