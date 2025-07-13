@@ -1,279 +1,196 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { MapPin, Clock, Phone, Mail, MessageCircle, Instagram, Facebook } from 'lucide-react';
+import { MapPin, Clock, Phone, Mail, MessageCircle, Instagram, Facebook, Navigation } from 'lucide-react';
 
 const Contact = () => {
   const contactInfo = {
     address: {
-      street: "123 Community Street",
-      city: "Downtown District",
-      state: "City",
-      zip: "12345"
+      street: "Strada Franklin Delano Roosevelt 2/1",
+      city: "Cluj-Napoca",
+      state: "Cluj",
+      zip: "400021"
     },
-    phone: "+1 (555) 123-4567",
-    email: "hello@biela.dev",
-    whatsapp: "+1 (555) 123-4567",
+    phone: "+40 746 018 659",
+    email: "cutie.cafea@gmail.com",
+    whatsapp: "+40 746 018 659",
     hours: {
-      weekdays: "Monday - Friday: 7:00 AM - 8:00 PM",
-      weekends: "Saturday - Sunday: 8:00 AM - 9:00 PM"
+      weekdays: "Luni - Vineri: 7:00 - 20:00",
+      weekends: "Sâmbătă - Duminică: 8:00 - 21:00"
     },
     social: {
-      instagram: "https://instagram.com/biela.dev",
-      facebook: "https://facebook.com/biela.dev",
-      tiktok: "https://tiktok.com/@biela.dev"
-    }
+      instagram: "https://instagram.com/cutie",
+      facebook: "https://facebook.com/cutie",
+      tiktok: "https://tiktok.com/@cutie"
+    },
+    mapLink: "https://www.google.com/maps?q=Strada+Franklin+Delano+Roosevelt+2%2F1%2C+Cluj-Napoca",
+    mapDirections: "https://www.google.com/maps/dir/?api=1&destination=Strada+Franklin+Delano+Roosevelt+2%2F1,+Cluj-Napoca"
   };
 
   return (
-    <div className="min-h-screen py-8 px-4">
+    <div className="min-h-screen py-8 px-4 relative">
       <div className="container mx-auto">
-        {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
+          <h1 className="text-4xl font-bold mb-4">Contactează-ne</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            We would love to hear from you! Whether you have questions, want to make a reservation, or just want to say hello, we are here for you.
+            Ne poți scrie oricând pentru întrebări, rezervări sau colaborări. Suntem aici pentru tine!
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
+          {/* Contact Info */}
           <div className="space-y-6">
-            {/* Address */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-3">
                   <MapPin className="h-6 w-6 text-primary" />
-                  <span>Location</span>
+                  <span>Adresă</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2">
-                  <p className="font-medium">{contactInfo.address.street}</p>
-                  <p className="text-muted-foreground">
-                    {contactInfo.address.city}, {contactInfo.address.state} {contactInfo.address.zip}
-                  </p>
-                  <div className="pt-4">
-                    <Button variant="outline" size="sm">
-                      Get Directions
-                    </Button>
-                  </div>
+                <a
+                  href={contactInfo.mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-primary font-medium hover:underline"
+                >
+                  {contactInfo.address.street}<br />
+                  {contactInfo.address.city}, România {contactInfo.address.zip}
+                </a>
+                <div className="pt-4">
+                  <Button variant="outline" size="sm" asChild>
+                    <a href={contactInfo.mapDirections} target="_blank" rel="noopener noreferrer">
+                      Deschide în Google Maps
+                    </a>
+                  </Button>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Hours */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-3">
                   <Clock className="h-6 w-6 text-primary" />
-                  <span>Business Hours</span>
+                  <span>Program</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2">
-                  <p>{contactInfo.hours.weekdays}</p>
-                  <p>{contactInfo.hours.weekends}</p>
-                  <p className="text-sm text-muted-foreground pt-2">
-                    Special holiday hours may apply. Please call ahead during holidays.
-                  </p>
-                </div>
+                <p>{contactInfo.hours.weekdays}</p>
+                <p>{contactInfo.hours.weekends}</p>
+                <p className="text-sm text-muted-foreground pt-2">
+                  Program special de sărbători – verifică în prealabil.
+                </p>
               </CardContent>
             </Card>
 
-            {/* Contact Methods */}
             <Card>
               <CardHeader>
-                <CardTitle>Get In Touch</CardTitle>
-                <CardDescription>
-                  Choose your preferred way to contact us
-                </CardDescription>
+                <CardTitle>Contact direct</CardTitle>
+                <CardDescription>Alege canalul preferat:</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <Phone className="h-5 w-5 text-primary" />
-                    <div>
-                      <p className="font-medium">Phone</p>
-                      <a 
-                        href={`tel:${contactInfo.phone}`} 
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        {contactInfo.phone}
-                      </a>
-                    </div>
+                    <a href={`tel:${contactInfo.phone}`} className="text-muted-foreground hover:text-primary transition">
+                      {contactInfo.phone}
+                    </a>
                   </div>
-
                   <div className="flex items-center space-x-3">
                     <Mail className="h-5 w-5 text-primary" />
-                    <div>
-                      <p className="font-medium">Email</p>
-                      <a 
-                        href={`mailto:${contactInfo.email}`} 
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        {contactInfo.email}
-                      </a>
-                    </div>
+                    <a href={`mailto:${contactInfo.email}`} className="text-muted-foreground hover:text-primary transition">
+                      {contactInfo.email}
+                    </a>
                   </div>
-
                   <div className="flex items-center space-x-3">
                     <MessageCircle className="h-5 w-5 text-primary" />
-                    <div>
-                      <p className="font-medium">WhatsApp Business</p>
-                      <a 
-                        href={`https://wa.me/${contactInfo.whatsapp.replace(/\D/g, '')}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        Message us on WhatsApp
-                      </a>
-                    </div>
+                    <a
+                      href={`https://wa.me/${contactInfo.whatsapp.replace(/\D/g, '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition"
+                    >
+                      Scrie-ne pe WhatsApp
+                    </a>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Social Media */}
             <Card>
               <CardHeader>
-                <CardTitle>Follow Us</CardTitle>
-                <CardDescription>
-                  Stay connected with our community on social media
-                </CardDescription>
+                <CardTitle>Social Media</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex space-x-4">
-                  <a 
-                    href={contactInfo.social.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-accent transition-colors"
-                  >
+                  <a href={contactInfo.social.instagram} target="_blank" rel="noopener noreferrer" className="text-sm flex items-center space-x-2 border p-3 rounded hover:bg-accent">
                     <Instagram className="h-5 w-5 text-pink-600" />
-                    <span className="text-sm">Instagram</span>
+                    <span>Instagram</span>
                   </a>
-                  <a 
-                    href={contactInfo.social.facebook}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-accent transition-colors"
-                  >
+                  <a href={contactInfo.social.facebook} target="_blank" rel="noopener noreferrer" className="text-sm flex items-center space-x-2 border p-3 rounded hover:bg-accent">
                     <Facebook className="h-5 w-5 text-blue-600" />
-                    <span className="text-sm">Facebook</span>
+                    <span>Facebook</span>
                   </a>
-                  <a 
-                    href={contactInfo.social.tiktok}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-accent transition-colors"
-                  >
+                  <a href={contactInfo.social.tiktok} target="_blank" rel="noopener noreferrer" className="text-sm flex items-center space-x-2 border p-3 rounded hover:bg-accent">
                     <MessageCircle className="h-5 w-5 text-purple-600" />
-                    <span className="text-sm">TikTok</span>
+                    <span>TikTok</span>
                   </a>
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Map */}
+          {/* Google Map */}
           <div>
             <Card className="h-full">
               <CardHeader>
-                <CardTitle>Find Us</CardTitle>
-                <CardDescription>
-                  We are located in the heart of the Downtown District, easily accessible by public transportation and with parking available nearby.
-                </CardDescription>
+                <CardTitle>Harta locației</CardTitle>
+                <CardDescription>Ne găsești cu ușurință în zona centrală din Cluj.</CardDescription>
               </CardHeader>
               <CardContent>
-                {/* Google Maps Embed Placeholder */}
-                <div className="bg-muted rounded-lg h-96 flex items-center justify-center">
-                  <div className="text-center">
-                    <MapPin className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                    <p className="text-muted-foreground">Google Maps Integration</p>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      Interactive map showing our exact location
-                    </p>
-                  </div>
+                <div className="overflow-hidden rounded-lg shadow border">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d625.9263833539189!2d23.58713095727382!3d46.77087535932285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47490e9cfa0fe325%3A0x7383598b94315840!2sStrada%20Franklin%20Delano%20Roosevelt%20nr.%202%2F1%2C%20Cluj-Napoca%20400021!5e0!3m2!1sro!2sro!4v1752423919867!5m2!1sro!2sro"
+                    width="100%"
+                    height="400"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Harta Cutie"
+                  ></iframe>
                 </div>
-                
-                <div className="mt-6 space-y-4">
-                  <div>
-                    <h4 className="font-semibold mb-2">Getting Here</h4>
-                    <div className="text-sm text-muted-foreground space-y-1">
-                      <p>• 2-minute walk from Central Station</p>
-                      <p>• Street parking available on Community Street</p>
-                      <p>• Public parking garage on 5th Avenue (2 blocks away)</p>
-                      <p>• Bike racks available in front of building</p>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h4 className="font-semibold mb-2">Accessibility</h4>
-                    <div className="text-sm text-muted-foreground space-y-1">
-                      <p>• Wheelchair accessible entrance</p>
-                      <p>• Accessible restrooms available</p>
-                      <p>• Clear pathways throughout café</p>
-                      <p>• Braille menus available upon request</p>
-                    </div>
-                  </div>
+
+                <div className="mt-6 space-y-4 text-sm text-muted-foreground">
+                  <h4 className="font-semibold mb-1">Cum ajungi la noi</h4>
+                  <ul className="space-y-1">
+                    <li>• 2 minute de mers pe jos de la stația centrală</li>
+                    <li>• Parcare pe stradă sau la Cluj Parking</li>
+                    <li>• Suport pentru biciclete în fața locației</li>
+                  </ul>
+                  <h4 className="font-semibold mt-4 mb-1">Accesibilitate</h4>
+                  <ul className="space-y-1">
+                    <li>• Intrare cu rampă</li>
+                    <li>• Toalete accesibile</li>
+                    <li>• Meniu în Braille disponibil</li>
+                  </ul>
                 </div>
               </CardContent>
             </Card>
           </div>
         </div>
-
-        {/* Additional Information */}
-        <section className="mt-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <Phone className="h-8 w-8 text-primary mx-auto mb-4" />
-                <h3 className="font-semibold mb-2">Quick Questions?</h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  For quick questions about our menu, hours, or availability, give us a call!
-                </p>
-                <Button variant="outline" size="sm">
-                  <a href={`tel:${contactInfo.phone}`}>Call Now</a>
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <Mail className="h-8 w-8 text-primary mx-auto mb-4" />
-                <h3 className="font-semibold mb-2">Business Inquiries</h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  For partnerships, events, or detailed information, email us!
-                </p>
-                <Button variant="outline" size="sm">
-                  <a href={`mailto:${contactInfo.email}`}>Send Email</a>
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <MessageCircle className="h-8 w-8 text-primary mx-auto mb-4" />
-                <h3 className="font-semibold mb-2">Instant Messaging</h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Need immediate assistance? Message us on WhatsApp!
-                </p>
-                <Button variant="outline" size="sm">
-                  <a 
-                    href={`https://wa.me/${contactInfo.whatsapp.replace(/\D/g, '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    WhatsApp Us
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
       </div>
+
+      {/* Floating button */}
+      <a
+        href={contactInfo.mapDirections}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 flex md:hidden items-center bg-primary text-white px-4 py-2 rounded-full shadow-lg hover:bg-primary/90 transition"
+      >
+        <Navigation className="h-4 w-4 mr-2" />
+        Deschide în Hărți
+      </a>
     </div>
   );
 };
