@@ -184,13 +184,13 @@ const Home = () => {
                 <div className="flex items-start space-x-3">
                   <MapPin className="h-5 w-5 text-violet-500 mt-1" />
                   <div>
-                    <p className="font-medium">Strada Comunității 123</p>
-                    <p className="text-muted-foreground">Centrul Vechi, Cluj-Napoca 400001</p>
+                    <p className="font-medium">Strada Franklin Delano Roosevelt 2/1</p>
+                    <p className="text-muted-foreground">Centrul Vechi, Cluj-Napoca</p>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <p><span className="font-medium">Telefon:</span> +40 264 123 456</p>
-                  <p><span className="font-medium">Email:</span> salut@cutie.ro</p>
+                  <p><span className="font-medium">Telefon:</span> +40 746 018 659</p>
+                  <p><span className="font-medium">Email:</span> cutie.cafea@gmail.com</p>
                 </div>
                 <div className="space-y-2">
                   <p className="font-medium">Program:</p>
@@ -199,15 +199,23 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-violet-50 rounded-lg h-64 flex items-center justify-center border border-violet-200">
-              <div className="text-center">
-                <MapPin className="h-12 w-12 text-violet-400 mx-auto mb-4" />
-                <p className="text-violet-600">Integrare Google Maps</p>
-                <p className="text-sm text-violet-500 mt-2">Cluj-Napoca, România</p>
-              </div>
-            </div>
+            <div className="overflow-hidden rounded-lg shadow border">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d625.9263833539189!2d23.58713095727382!3d46.77087535932285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47490e9cfa0fe325%3A0x7383598b94315840!2sStrada%20Franklin%20Delano%20Roosevelt%20nr.%202%2F1%2C%20Cluj-Napoca%20400021!5e0!3m2!1sro!2sro!4v1752423919867!5m2!1sro!2sro"
+                    width="100%"
+                    height="400"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Harta Cutie"
+                  ></iframe>
+                </div>
+                
           </div>
+          
         </div>
+        
       </section>
 
       {/* Newsletter */}
@@ -237,7 +245,9 @@ const Home = () => {
             </div>
           </form>
         </div>
+        
       </section>
+      
     </div>
   );
 };
