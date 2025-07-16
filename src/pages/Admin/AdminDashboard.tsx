@@ -2,7 +2,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-
 const AdminDashboard: React.FC = () => {
   return (
     <div className="min-h-screen p-8 bg-gray-100">

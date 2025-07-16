@@ -15,6 +15,7 @@ import ReservationsPanel from './pages/Admin/ReservationsPanel';
 import NewsletterPanel from './pages/Admin/NewsletterPanel';
 import ManagePanel from './pages/Admin/manage/ManagePanel';
 import ProtectedRoute from '@/components/ProtectedRoute';
+import ContentManager from './pages/Admin/ContentManager';
 
 function App() {
   return (
@@ -59,7 +60,7 @@ function App() {
   path="/dashboard/manage"
   element={
     <ProtectedRoute>
-      <ManagePanel />
+      <ContentManager />
     </ProtectedRoute>
   }
 />
