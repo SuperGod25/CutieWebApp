@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 import { toast, Toaster } from 'sonner';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 type ObjectType = 'products' | 'events' | 'services';
 
@@ -30,6 +33,13 @@ const ContentManager: React.FC = () => {
     events: ['title', 'event_date', 'event_time', 'price', 'category', 'description'],
     services: ['name', 'type', 'price', 'description']
   };
+
+  const CATEGORY_OPTIONS = {
+  products: ['coffee', 'flowers', 'bundle'],
+  events: ['Workshop', 'Creative', 'Community', 'Arts', 'Networking'],
+  services: ['photo', 'event-space', 'team-building'],
+};
+
 
   const fetchData = async () => {
     setLoading(true);
@@ -200,16 +210,72 @@ const ContentManager: React.FC = () => {
           Adaugă {type === 'products' ? 'produs' : type === 'events' ? 'eveniment' : 'serviciu'}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {fields[type].map((key) => (
-            <input
-              key={key}
-              type="text"
-              placeholder={key}
-              className="border p-2 rounded"
-              value={newItem[key] || ''}
-              onChange={(e) => setNewItem({ ...newItem, [key]: e.target.value })}
-            />
-          ))}
+          {fields[type].map((key) => {
+  if (key === 'category' || key === 'type') {
+    return (
+      <select
+        key={key}
+        className="border p-2 rounded"
+        value={newItem[key] || ''}
+        onChange={(e) => setNewItem({ ...newItem, [key]: e.target.value })}
+      >
+        <option value="">Selectează {key}</option>
+        {CATEGORY_OPTIONS[type]?.map((opt) => (
+          <option key={opt} value={opt}>
+            {opt}
+          </option>
+        ))}
+      </select>
+    );
+  }
+
+  if (key === 'event_date') {
+    return (
+      <DatePicker
+        key={key}
+        selected={newItem[key] ? new Date(newItem[key]) : null}
+        onChange={(date) => setNewItem({ ...newItem, [key]: date })}
+        className="border p-2 rounded w-full"
+        dateFormat="yyyy-MM-dd"
+        placeholderText="Selectează data"
+      />
+    );
+  }
+
+  if (key === 'event_time') {
+    return (
+      <DatePicker
+        key={key}
+        selected={newItem[key] ? new Date(`1970-01-01T${newItem[key]}`) : null}
+        onChange={(time) =>
+          setNewItem({
+            ...newItem,
+            [key]: time?.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          })
+        }
+        showTimeSelect
+        showTimeSelectOnly
+        timeIntervals={15}
+        timeCaption="Ora"
+        dateFormat="HH:mm"
+        className="border p-2 rounded w-full"
+        placeholderText="Selectează ora"
+      />
+    );
+  }
+
+  return (
+    <input
+      key={key}
+      type="text"
+      placeholder={key}
+      className="border p-2 rounded"
+      value={newItem[key] || ''}
+      onChange={(e) => setNewItem({ ...newItem, [key]: e.target.value })}
+    />
+  );
+})}
+
           <input
             type="file"
             accept="image/*"

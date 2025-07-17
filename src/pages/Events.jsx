@@ -123,13 +123,14 @@ const Events = () => {
               {upcomingEvents.map((event) => (
                 <Card key={event.id} className="h-full hover:shadow-lg transition-shadow">
                   {event.image_url && (
-                    <div className="aspect-video overflow-hidden rounded-t-lg">
-                      <img 
-                        src={event.image_url} 
-                        alt={event.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                    <div className="w-full h-[200px] overflow-hidden rounded-t-lg">
+  <img 
+    src={event.image_url} 
+    alt={event.title}
+    className="w-full h-full object-contain object-center"
+  />
+</div>
+
                   )}
                   <CardHeader>
                     <div className="flex justify-between items-start mb-2">
