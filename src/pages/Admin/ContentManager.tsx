@@ -30,7 +30,7 @@ const ContentManager: React.FC = () => {
 
   const fields = {
     products: ['name', 'category', 'price', 'description'],
-    events: ['title', 'event_date', 'event_time', 'price', 'category', 'description'],
+    events: ['title', 'event_date', 'event_time', 'price', 'category', 'capacity', 'description'],
     services: ['name', 'type', 'price', 'description']
   };
 
