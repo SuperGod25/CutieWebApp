@@ -1,14 +1,40 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
 
-const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  const isAdmin = localStorage.getItem('isAdmin') === 'true';
+const ProtectedRoute = ({ children }) => {
+  const navigate = useNavigate();
+  const [authorized, setAuthorized] = useState<boolean | null>(null);
 
-  if (!isAdmin) {
-    return <Navigate to="/admin" replace />;
+  useEffect(() => {
+    const checkAdmin = async () => {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) return navigate('/admin');
+
+  const { data, error } = await supabase
+    .from('admins')
+    .select('id')
+    .eq('id', user.id)
+    .limit(1)
+    .maybeSingle();
+
+  if (data && !error) {
+    setAuthorized(true);
+  } else {
+    console.warn('User is not in admins table');
+    navigate('/unauthorized');
   }
+};
 
-  return children;
+
+    checkAdmin();
+  }, [navigate]);
+
+  if (authorized === null) return <div>Verificare...</div>;
+  return authorized ? children : null;
 };
 
 export default ProtectedRoute;

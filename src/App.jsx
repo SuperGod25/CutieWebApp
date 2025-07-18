@@ -13,9 +13,14 @@ import LoginPage from './pages/Admin/LoginPage';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import ReservationsPanel from './pages/Admin/ReservationsPanel';
 import NewsletterPanel from './pages/Admin/NewsletterPanel';
-import ManagePanel from './pages/Admin/manage/ManagePanel';
 import ProtectedRoute from '@/components/ProtectedRoute';
-import ContentManager from './pages/Admin/ContentManager';
+import ContentManager from './pages/Admin/ContentManager';import Unauthorized from '@/pages/Unauthorized';
+import SignUp from '@/pages/SignUp';
+
+
+
+
+
 
 function App() {
   return (
@@ -32,6 +37,8 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin" element={<LoginPage />} />
+            <Route path="/unauthorized" element={<Unauthorized />} />
+            {/*<Route path="/signup" element={<SignUp />} />*/}
             <Route
                 path="/dashboard"
                 element={
@@ -64,6 +71,8 @@ function App() {
     </ProtectedRoute>
   }
 />
+
+
           </Routes>
         </main>
         <Footer />
